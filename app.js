@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Connection URL
 
-mongoose.connect('mongodb://localhost:27017/fruitsDB', { useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/fruitsDB',  { useNewUrlParser: true }, { useUnifiedTopology: true })
 
 
 //insert Data 
@@ -22,9 +22,9 @@ const furitSchema = new mongoose.Schema ({
 const Fruit = mongoose.model("Fruit", furitSchema);
 
 const fruit = new Fruit ({
-
-    rate: 40,
-    review:"Great fruit"
+    name: "APPLESS",
+    rate: 1,
+    review:"Yummy!"
 })
 
  fruit.save();
@@ -47,7 +47,7 @@ person.save();
 
 const orange = new Fruit ({
     name: "Orange",
-    rate: 40,
+    rate: 4,
     review:"Yummy"
 })
 const kiwi = new Fruit ({
@@ -60,7 +60,7 @@ const banana = new Fruit ({
     rate: 1,
     review:"To sour for me"
 })
-
+orange.save();
 // Fruit.insertMany([
 //     kiwi,
 //     orange,
@@ -81,10 +81,30 @@ Fruit.find(function(err, fruits){
     if (err){
         console.log(err);
     }else {
-       mongoose.connection.close();
+      
 
         fruits.forEach(function(fruit){
             console.log(fruit)
+            mongoose.connection.close();
         })
+    }
+})
+
+
+//update document
+Fruit.updateOne({_id:"603b08ecc495801edcc60ee6"}, {name: "Peach"}, function(err){
+    if (err){
+        console.log(err)
+    } else {
+        console.log("Successfully updated the document");
+    }
+})
+
+
+Fruit.deleteOne({_id:"603c14e1a08a261d745fb080"}, function(err){
+    if (err){
+        console.log(err)
+    } else {
+        console.log("Successfully Delete the document");
     }
 })
