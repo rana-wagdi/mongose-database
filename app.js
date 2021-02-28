@@ -2,7 +2,25 @@ const mongoose = require('mongoose');
 
 // Connection URL
 
-mongoose.connect('mongodb://localhost:27017/personsDB', { useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/fruitsDB', { useUnifiedTopology: true })
+
+
+//insert Data 
+const furitSchema = new mongoose.Schema ({
+    name: String,
+    rate: Number,
+    review: String
+});
+
+const Fruit = mongoose.model("Fruit", furitSchema);
+
+const fruit = new Fruit ({
+    name: "Apple",
+    rate: 5,
+    review:"Great fruit"
+})
+
+// fruit.save();
 
 //insert Data 
 const personSchema = new mongoose.Schema ({
@@ -20,36 +38,35 @@ const person = new Person ({
 
 person.save();
 
-//insert Document
+const orange = new Fruit ({
+    name: "Orange",
+    rate: 3,
+    review:"weird texture"
+})
+const kiwi = new Fruit ({
+    name: "Kiwi",
+    rate: 2,
+    review:"The best fruit"
+})
+const banana = new Fruit ({
+    name: "Banana",
+    rate: 1,
+    review:"To sour for me"
+})
 
-// const insertDocument = function(db, callback){
-//     //Get the documents collection
-//     const collection = db.collection('fruits');
-//     //Insert some documents
-//     collection.insertMany([
-//         {
-//             name: "Apple",
-//             score: 8,
-//             review: "Great fruit"
-//         },
-//         {
-//              name: "Orange",
-//              score: 6,
-//             review: "Kinda sour"
-//         },
-//         { 
-//              name: "Banana",
-//              score: 9,
-//             review: "Great stuff!"
-//         }
-//     ], function(err, result) {
-//         assert.equal(err, null);
-//         assert.equal(3, result.result.n);
-//         assert.equal(3, result.ops.length);
-//         console.log("Inserted 3 documents into the collection");
-//         callback(result);
-//     });
-// }
+Fruit.insertMany([
+    kiwi,
+    orange,
+    banana 
+], function(err){
+     if (err){
+         console.log(err)
+     } else {
+         console.log("Succefully saved all the fruits ti fritsDB")
+     }
+})
+
+
 
 // find document 
 const findDocuments = function(db, callback) {
