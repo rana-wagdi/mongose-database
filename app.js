@@ -7,20 +7,27 @@ mongoose.connect('mongodb://localhost:27017/fruitsDB', { useUnifiedTopology: tru
 
 //insert Data 
 const furitSchema = new mongoose.Schema ({
-    name: String,
-    rate: Number,
+    name: {
+        type: String,
+        required: [true, "Please chexk your data entry , no name data specified!"]
+    } ,
+    rate: {
+        type: Number,
+        min: 1,
+        max: 10
+    },
     review: String
 });
 
 const Fruit = mongoose.model("Fruit", furitSchema);
 
 const fruit = new Fruit ({
-    name: "Apple",
-    rate: 5,
+
+    rate: 40,
     review:"Great fruit"
 })
 
-// fruit.save();
+ fruit.save();
 
 //insert Data 
 const personSchema = new mongoose.Schema ({
@@ -40,8 +47,8 @@ person.save();
 
 const orange = new Fruit ({
     name: "Orange",
-    rate: 3,
-    review:"weird texture"
+    rate: 40,
+    review:"Yummy"
 })
 const kiwi = new Fruit ({
     name: "Kiwi",
@@ -77,7 +84,7 @@ Fruit.find(function(err, fruits){
        mongoose.connection.close();
 
         fruits.forEach(function(fruit){
-            console.log(fruit.name)
+            console.log(fruit)
         })
     }
 })
