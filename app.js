@@ -54,21 +54,29 @@ const banana = new Fruit ({
     review:"To sour for me"
 })
 
-Fruit.insertMany([
-    kiwi,
-    orange,
-    banana 
-], function(err){
-     if (err){
-         console.log(err)
-     } else {
-         console.log("Succefully saved all the fruits ti fritsDB")
-     }
-})
+// Fruit.insertMany([
+//     kiwi,
+//     orange,
+//     banana 
+// ], function(err){
+//      if (err){
+//          console.log(err)
+//      } else {
+//          console.log("Succefully saved all the fruits ti fritsDB")
+//      }
+// })
 
 
 
 // find document 
+
+Fruit.find(function(err, fruits){
+    if (err){
+        console.log(err);
+    }else {
+        console.log(fruits);
+    }
+})
 const findDocuments = function(db, callback) {
     //Get the documents collection
     const collection = db.collection('fruits');
