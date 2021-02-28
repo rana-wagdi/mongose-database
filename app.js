@@ -108,3 +108,11 @@ Fruit.deleteOne({_id:"603c14e1a08a261d745fb080"}, function(err){
         console.log("Successfully Delete the document");
     }
 })
+
+Person.deleteMany({name: "Rana"}, function(err){
+    if (err){
+        console.log(err)
+    } else {
+        console.log("Successfully Delete the document")
+    }
+})
