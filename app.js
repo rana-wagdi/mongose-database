@@ -33,13 +33,22 @@ const fruit = new Fruit ({
 const personSchema = new mongoose.Schema ({
     name: String,
     age: Number,
+    favouriteFruit: furitSchema
 });
 
 const Person = mongoose.model("Person", personSchema);
 
+const pineaplle = new Fruit ({
+    name: "Pinapple",
+    rate: 9,
+    review: "Good fruit"
+})
+pineaplle.save();
+
 const person = new Person ({
-    name: "Rana",
+    name: "Nada",
     age: 23,
+    favouriteFruit: pineaplle
     
 })
 
